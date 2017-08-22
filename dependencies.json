@@ -1,0 +1,13 @@
+{
+  "react-navigation": "1.0.0-beta.11",
+  "native-base": "^2.3.1",
+  "react-native-simple-toast": "https://github.com/hzlgit/react-native-simple-toast",
+  "react-native-vector-icons": "^4.3.0",
+  "react-redux": "^5.0.6",
+  "redux": "^3.7.2",
+  "redux-actions": "^2.2.1",
+  "redux-logger": "^3.0.6",
+  "redux-promise": "^0.5.3",
+  "redux-thunk": "^2.2.0",
+  "redux-persist": "^4.8.3"
+}
