@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Button } from 'react-native'
 
-import { NavigationActions } from '../utils'
+import { NavigationActions } from 'react-navigation';
 
 class Detail extends Component {
     static navigationOptions = {
@@ -9,11 +9,12 @@ class Detail extends Component {
     }
 
     gotoDetail = () => {
-        this.props.dispatch(NavigationActions.navigate({ routeName: 'Detail' }))
+        this.props.navigation.dispatch(NavigationActions.navigate({ routeName: 'Detail' }))
     }
 
     goBack = () => {
-        this.props.dispatch(NavigationActions.back({ routeName: 'Account' }))
+        this.props.navigation.dispatch(NavigationActions.back({ routeName: 'Account' }))
+
     }
 
     render() {

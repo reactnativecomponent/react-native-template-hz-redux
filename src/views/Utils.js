@@ -15,7 +15,7 @@ class Utils extends Component {
         };
     }
     componentDidMount() {
-        this.checkUpdate();
+        // this.checkUpdate();
     }
     componentWillReceiveProps(nextProps) {
         if (this.props.toast.id !== nextProps.toast.id) {

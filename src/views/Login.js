@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Button, ActivityIndicator } from 'react-native'
-
-import { createAction, NavigationActions } from '../utils'
+import {NavigationActions} from 'react-navigation';
+const resetAction = NavigationActions.reset({
+    index: 0,
+    actions: [
+        NavigationActions.navigate({ routeName: 'Main'})
+    ]
+});
 
 class Login extends Component {
     static navigationOptions = {
@@ -9,11 +14,11 @@ class Login extends Component {
     }
 
     onLogin = () => {
-        this.props.dispatch(createAction('app/login')())
+        this.props.navigation.dispatch(resetAction)
     }
 
     onClose = () => {
-        this.props.dispatch(NavigationActions.back())
+        this.props.navigation.goBack();
     }
 
     render() {

@@ -1,20 +1,20 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Image, Button } from 'react-native'
 import { NavigationActions } from '../utils'
+import {Icon} from 'native-base';
 
 class Home extends Component {
     static navigationOptions = {
         title: 'Home',
         tabBarLabel: 'Home',
         tabBarIcon: ({ focused, tintColor }) =>
-            <Image
-                style={[styles.icon, { tintColor: focused ? tintColor : 'gray' }]}
-                source={require('../images/house.png')}
+            <Icon
+                name="ios-home"
             />,
     }
 
     gotoDetail = () => {
-        this.props.dispatch(NavigationActions.navigate({ routeName: 'Detail' }))
+        this.props.navigation.navigate("Detail");
     }
 
     render() {

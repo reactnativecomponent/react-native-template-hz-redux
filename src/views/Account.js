@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Image, Button } from 'react-native'
-
+import {Icon} from 'native-base';
 import { NavigationActions } from '../utils'
 
 class Account extends Component {
@@ -8,14 +8,14 @@ class Account extends Component {
         title: 'Account',
         tabBarLabel: 'Account',
         tabBarIcon: ({ focused, tintColor }) =>
-            <Image
-                style={[styles.icon, { tintColor: focused ? tintColor : 'gray' }]}
-                source={require('../images/person.png')}
+            <Icon
+                name="ios-user"
             />,
     }
 
     gotoLogin = () => {
-        this.props.dispatch(NavigationActions.navigate({ routeName: 'Login' }))
+
+        this.props.navigation.navigate("Login");
     }
 
     render() {
