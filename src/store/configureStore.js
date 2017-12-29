@@ -8,6 +8,7 @@ import minPendingTimeMiddleware from './minPendingTime';
 import {createLogger} from 'redux-logger';
 import reducers from '../reducers';
 import { persistStore, persistCombineReducers } from 'redux-persist'
+import storage from 'redux-persist/es/storage'
 
 const isDebuggingInChrome = __DEV__ && !!window.navigator.userAgent;
 const logger = createLogger({
@@ -31,7 +32,7 @@ if (isDebuggingInChrome) {
 }
 const config = {
     key: 'root',
-    AsyncStorage,
+    storage,
 }
 
 export default function configureStore(initialState) {
