@@ -6,8 +6,12 @@ import configureStore from './store/configureStore';
 import getTheme from '../native-base-theme/components';
 import platform from '../native-base-theme/variables/platform';
 import connectComponent from './utils/connectComponent';
+import { PersistGate } from 'redux-persist/es/integration/react'
 const Navigation = connectComponent(NavigationComponent);
-const store = configureStore();
+const { persistor, store } = configureStore()
+const onBeforeLift = () => {
+    // take some action before the gate lifts
+}
 export default class Root extends Component {
     constructor() {
         super();
@@ -16,7 +20,12 @@ export default class Root extends Component {
         return (
             <StyleProvider style={getTheme(platform)}>
                 <Provider store={store}>
-                    <Navigation/>
+                    <PersistGate
+                        loading={<Loading />}
+                        onBeforeLift={onBeforeLift}
+                        persistor={persistor}>
+                        <Navigation/>
+                    </PersistGate>
                 </Provider>
             </StyleProvider>
         );

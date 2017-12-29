@@ -7,7 +7,7 @@ import utilsMiddleware from './utilsMiddleware';
 import minPendingTimeMiddleware from './minPendingTime';
 import {createLogger} from 'redux-logger';
 import reducers from '../reducers';
-import { persistStore, autoRehydrate } from 'redux-persist'
+import { persistStore, persistCombineReducers } from 'redux-persist'
 
 const isDebuggingInChrome = __DEV__ && !!window.navigator.userAgent;
 const logger = createLogger({
@@ -29,12 +29,18 @@ let middlewares = [
 if (isDebuggingInChrome) {
 	 middlewares.push(logger);
 }
-
+const config = {
+    key: 'root',
+    AsyncStorage,
+}
 
 export default function configureStore(initialState) {
+    let reducer = persistCombineReducers(config, reducers)
+
+
 	const store = applyMiddleware(
 		...middlewares
-	)(createStore)(reducers, initialState, window.devToolsExtension && window.devToolsExtension());
+	)(createStore)(reducer, initialState, window.devToolsExtension && window.devToolsExtension());
 
 	if (module.hot) {
 		module.hot.accept(() => {
@@ -46,8 +52,8 @@ export default function configureStore(initialState) {
 	if (isDebuggingInChrome) {
 		window.store = store;
 	}
-    persistStore(store,{storage: AsyncStorage});
-	return store;
+    let persistor = persistStore(store)
+	return {persistor,store};
 }
 
 
