@@ -1,13 +1,15 @@
 export default function asyncActionCallbackMiddleware() {
-	return next => action => {
-		const { meta = {}, error, payload } = action;
-		const { sequence = {}, resolved, rejected } = meta;
-		if (sequence.type !== 'next') return next(action);
+  return next => action => {
+    const { meta = {}, error, payload } = action
+    const { sequence = {}, resolved, rejected } = meta
+    if (sequence.type !== 'next') return next(action)
 
+    // do callback
+    if (error) {
+      if (rejected) { rejected(payload) }
+    } else if (resolved) { resolved(payload) }
+    // error ? rejected && rejected(payload) : resolved && resolved(payload)
 
-		// do callback
-		error ? (rejected && rejected(payload)) : (resolved && resolved(payload));
-
-		next(action);
-	}
+    return next(action)
+  }
 }
